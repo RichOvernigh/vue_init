@@ -6,7 +6,7 @@
                 :default-active="activeMenu"
                 :collapse="isCollapse"
                 :background-color="settings.sideTheme === 'theme-dark' ? variables.menuBg : variables.menuLightBg"
-                :text-color="settings.sideTheme === 'theme-dark' ? variables.menuText : '#7E7E7E'"
+                :text-color="settings.sideTheme === 'theme-dark' ? variables.menuText : '#C8C8C8'"
                 :unique-opened="true"
                 :active-text-color="settings.theme"
                 :collapse-transition="false"

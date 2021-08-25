@@ -1,3 +1,10 @@
+//  样式覆盖
+.el-table .el-table__header-wrapper th, .el-table .el-table__fixed-header-wrapper th{
+  background-color:#eef0f3!important;
+}
+.el-table th.is-leaf, .el-table td{
+  border-bottom: 1px solid #eef0f3;
+}
  /** 基础通用 **/
 .pt5 {
 	padding-top: 5px;
@@ -18,7 +25,7 @@
 	margin-bottom: 5px;
 }
 .mb8 {
-	margin-bottom: 8px;
+	margin-bottom: 23px;
 }
 .ml5 {
 	margin-left: 5px;
@@ -125,7 +132,7 @@
 /** 表格更多操作下拉样式 */
 .el-table .el-dropdown-link {
 	cursor: pointer;
-	color: #1890ff;
+	color: #6374FF;
 	margin-left: 5px;
 }
 

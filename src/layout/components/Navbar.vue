@@ -3,6 +3,7 @@
     <!-- <div class="navbar" :style="{ background: sideTheme === 'theme-dark' ? variables.menuBg : variables.navBgColor }"> -->
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <!-- <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /> -->
+    <div class="title">LIVELAB报表管理系统</div>
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -116,7 +117,12 @@ export default {
   // background: #1890FF;
   background: #fff;
   // box-shadow: 0 1px 4px rgba(0,21,41,.08);
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title{
+    font-size: 18px;
+  }
   .hamburger-container {
     line-height: 100px;
     height: 100%;

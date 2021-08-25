@@ -295,6 +295,13 @@ color: #000 !important;
  line-height: 40px;
  font-size: 18px;
  padding: 0;
- border: none;
+//  border: none;
+
+}
+::v-deep .el-button{
+  border: none;
+  &::before{
+    bottom: 0px;
+  }
 }
 </style>

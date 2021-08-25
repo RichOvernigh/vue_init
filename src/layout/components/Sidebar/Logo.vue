@@ -9,11 +9,11 @@
         <!-- <h1 class="sidebar-title" :style="{ color: sideTheme === 'theme-dark' ? variables.sidebarTitle : variables.sidebarTitle }">{{ 321 }} </h1> -->
         <img src="@/assets/logo/logo.jpg" style="margin:auto;width:50px" alt="">
       </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
+      <router-link v-else key="expand" class="sidebar-logo-link" style="display:flex;line-height:100px" to="/">
         <!-- <img v-if="logo" :src="logo" class="sidebar-logo"> -->
         <!-- <h1 class="sidebar-title" :style="{ color: sideTheme === 'theme-dark' ? variables.sidebarTitle : variables.sidebarLightTitle }">{{ title }} </h1> -->
-        <h1 class="sidebar-title" :style="{ color: sideTheme === 'theme-dark' ? variables.sidebarTitle : variables.sidebarTitle }">{{ title }} </h1>
-        <!-- <img src="@/assets/logo/logo.jpg" style="margin:auto" alt=""> -->
+        <!-- <h1 class="sidebar-title" :style="{ color: sideTheme === 'theme-dark' ? variables.sidebarTitle : variables.sidebarTitle }">{{ title }} </h1> -->
+        <img src="@/assets/logo/logo.jpg" style="margin:auto" alt="">
 
       </router-link>
     </transition>

@@ -56,7 +56,7 @@ export default {
 }
 
 .svg-icon{
-  color:#6374FF ;
+  color:#000 ;
   /* width: 30px!important;
   height: 30px!important; */
 }
