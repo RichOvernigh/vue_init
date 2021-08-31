@@ -11,6 +11,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import directive from './directive' //directive
+import { storage } from '@/utils/storage';
 
 import './assets/icons' // icon
 import './permission' // permission control
@@ -36,6 +37,7 @@ Vue.prototype.selectDictLabel = selectDictLabel
 Vue.prototype.selectDictLabels = selectDictLabels
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
+Vue.prototype.$storage = storage;
 
 Vue.prototype.msgSuccess = function (msg) {
   this.$message({ showClose: true, message: msg, type: "success" });

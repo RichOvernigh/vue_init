@@ -77,7 +77,8 @@
         <el-checkbox
           v-model="loginForm.rememberMe"
           class="login-checkbox animated bounceInRight"
-        >记住密码</el-checkbox>
+          label="记住密码"
+        ></el-checkbox>
         <el-form-item style="width: 100%" class="animated bounceInLeft">
           <el-button
             :loading="loading"
@@ -202,7 +203,37 @@ export default {
 
 <style lang="scss" scoped>
 @import './login.scss';
-
+//
+::v-deep .el-form-item__content{
+  line-height: 36px;
+  font-size: 14px;
+}
+::v-deep .el-input__inner{
+  padding-left: 30px;
+}
+::v-deep .el-input--medium{
+  font-size: 14px;
+}
+// ::v-deep .el-checkbox{
+//   font-size: 14px;
+//   .el-checkbox__label{
+//     font-size: 14px;
+//     line-height: 19px;
+//     padding-left: 10px;
+//   }
+// }
+::v-deep .el-checkbox__inner{
+  // width: 14px;
+  // min-width: 0.7rem;
+  // min-height: 0.7rem;
+  // height: 14px;
+  &:after{
+    // height:8px;
+    // min-height: 0.35rem;
+    // left: 4px;
+    // top: 1px;
+  }
+}
 .login {
   display: flex;
   justify-content: center;

@@ -12,12 +12,14 @@
       </el-tooltip>
     </el-row>
     <el-dialog :title="title" :visible.sync="open" append-to-body>
-      <el-transfer
-        :titles="['显示', '隐藏']"
-        v-model="value"
-        :data="columns"
-        @change="dataChange"
-      ></el-transfer>
+      <div class="flex justify-center">
+        <el-transfer
+          :titles="['显示', '隐藏']"
+          v-model="value"
+          :data="columns"
+          @change="dataChange"
+        ></el-transfer>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -50,6 +52,7 @@ export default {
         this.value.push(parseInt(item));
       }
     }
+    this.initData()
   },
   methods: {
     // 搜索
@@ -66,6 +69,14 @@ export default {
         const key = this.columns[item].key;
         this.columns[item].visible = !data.includes(key);
       }
+      this.$storage.set(`${this.$route.name}tableCheckArr`,this.value)||[]
+    },
+    initData(){
+     const list = this.$storage.get(`${this.$route.name}tableCheckArr`)||[]
+       list?.forEach((item)=>{
+         this.columns[item].visible=false
+       })
+     this.value=list||[]
     },
     // 打开显隐列dialog
     showColumn() {
