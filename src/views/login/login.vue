@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="top-box animated bounceInDown" >
+    <div class="top-box animated bounceInDown">
       <img src="@/assets/login/+++.png" class="jia-img" alt="">
     </div>
     <div class="center-box ">
@@ -13,7 +13,7 @@
           <img src="@/assets/login/login-left-bg.png" class="login-left-bg" alt="">
           <img src="@/assets/login/login-left-top-bg.png" class="login-left-top-bg" alt="">
           <img src="@/assets/login/login-logo.png" class="login-logo  animated bounceInUp" alt="">
-          <div class="border animated flipInY"></div>
+          <div class="border animated flipInY" />
           <div class="login-title">LIVELAB报表管理系统</div>
           <el-form
             ref="loginForm"
@@ -21,40 +21,40 @@
             :rules="loginRules"
             class="login-form"
           >
-      <div>
-        <!-- <h3 class="title">LiveLab报表管理系统</h3> -->
-        <el-form-item prop="username" class="animated slideInLeft" >
-          <el-input
-            v-model="loginForm.username"
-            type="text"
-            auto-complete="off"
-            placeholder="账号"
-            size="medium"
-          >
-            <svg-icon
-              slot="prefix"
-              icon-class="user"
-              class="el-input__icon input-icon"
-            />
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password" class="animated slideInRight">
-          <el-input
-            v-model="loginForm.password"
-            type="password"
-            auto-complete="off"
-            placeholder="密码"
-            size="medium"
-            @keyup.enter.native="handleLogin"
-          >
-            <svg-icon
-              slot="prefix"
-              icon-class="password"
-              class="el-input__icon input-icon"
-            />
-          </el-input>
-        </el-form-item>
-        <!-- <el-form-item prop="code">
+            <div>
+              <!-- <h3 class="title">LiveLab报表管理系统</h3> -->
+              <el-form-item prop="username" class="animated slideInLeft">
+                <el-input
+                  v-model="loginForm.username"
+                  type="text"
+                  auto-complete="off"
+                  placeholder="账号"
+                  size="medium"
+                >
+                  <svg-icon
+                    slot="prefix"
+                    icon-class="user"
+                    class="el-input__icon input-icon"
+                  />
+                </el-input>
+              </el-form-item>
+              <el-form-item prop="password" class="animated slideInRight">
+                <el-input
+                  v-model="loginForm.password"
+                  type="password"
+                  auto-complete="off"
+                  placeholder="密码"
+                  size="medium"
+                  @keyup.enter.native="handleLogin"
+                >
+                  <svg-icon
+                    slot="prefix"
+                    icon-class="password"
+                    class="el-input__icon input-icon"
+                  />
+                </el-input>
+              </el-form-item>
+              <!-- <el-form-item prop="code">
           <el-input
             v-model="loginForm.code"
             auto-complete="off"
@@ -74,26 +74,26 @@
             <img :src="codeUrl" class="login-code-img" @click="getCode">
           </div>
         </el-form-item> -->
-        <el-checkbox
-          v-model="loginForm.rememberMe"
-          class="login-checkbox animated bounceInRight"
-          label="记住密码"
-        ></el-checkbox>
-        <el-form-item style="width: 100%" class="animated bounceInLeft">
-          <el-button
-            :loading="loading"
-            class="login-btn"
-            size="medium"
-            type="primary"
-            @click.native.prevent="handleLogin"
-          >
-            <span v-if="!loading">登 录</span>
-            <span v-else>登 录 中...</span>
-            <div></div>
-          </el-button>
-        </el-form-item>
-      </div>
-    </el-form>
+              <el-checkbox
+                v-model="loginForm.rememberMe"
+                class="login-checkbox animated bounceInRight"
+                label="记住密码"
+              />
+              <el-form-item style="width: 100%" class="animated bounceInLeft">
+                <el-button
+                  :loading="loading"
+                  class="login-btn"
+                  size="medium"
+                  type="primary"
+                  @click.native.prevent="handleLogin"
+                >
+                  <span v-if="!loading">登 录</span>
+                  <span v-else>登 录 中...</span>
+                  <div />
+                </el-button>
+              </el-form-item>
+            </div>
+          </el-form>
         </div>
       </div>
     </div>
@@ -127,7 +127,7 @@ export default {
         ],
         password: [
           { required: true, trigger: 'blur', message: '密码不能为空' }
-        ],
+        ]
         // code: [
         //   { required: true, trigger: 'change', message: '验证码不能为空' }
         // ]

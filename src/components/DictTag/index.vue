@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable -->
   <div>
     <template v-for="(item, index) in options">
       <template v-if="values.includes(item.dictValue)">
@@ -7,8 +8,7 @@
           :key="item.dictValue"
           :index="index"
           :class="item.cssClass"
-          >{{ item.dictLabel }}</span
-        >
+        >{{ item.dictLabel }}</span>
         <el-tag
           v-else
           :key="item.dictValue"
@@ -25,13 +25,14 @@
 
 <script>
 export default {
-  name: "DictTag",
+  name: 'DictTag',
   props: {
     options: {
       type: Array,
-      default: null,
+      default: null
     },
-    value: [String, Array],
+    // eslint-disable-next-line vue/require-default-prop
+    value: [String, Array]
   },
   computed: {
     values() {
@@ -40,8 +41,8 @@ export default {
       } else {
         return [];
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

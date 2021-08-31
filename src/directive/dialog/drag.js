@@ -1,8 +1,8 @@
 
 export default {
   bind(el, binding, vnode, oldVnode) {
-    const value = binding.value
-    if (value == false) return
+    const value = binding.value;
+    if (value == false) return;
     // 获取拖拽内容头部
     const dialogHeaderEl = el.querySelector('.el-dialog__header');
     const dragDom = el.querySelector('.el-dialog');
@@ -34,27 +34,26 @@ export default {
       } else {
         styL = +sty.left.replace(/\px/g, '');
         styT = +sty.top.replace(/\px/g, '');
-      };
+      }
 
       // 鼠标拖拽事件
-      document.onmousemove = function (e) {
+      document.onmousemove = function(e) {
         // 通过事件委托，计算移动的距离 （开始拖拽至结束拖拽的距离）
         const l = e.clientX - disX;
         const t = e.clientY - disY;
 
-        let finallyL = l + styL
-        let finallyT = t + styT
+        const finallyL = l + styL;
+        const finallyT = t + styT;
 
         // 移动当前元素
         dragDom.style.left = `${finallyL}px`;
         dragDom.style.top = `${finallyT}px`;
-
       };
 
-      document.onmouseup = function (e) {
+      document.onmouseup = function(e) {
         document.onmousemove = null;
         document.onmouseup = null;
       };
-    }
+    };
   }
 };

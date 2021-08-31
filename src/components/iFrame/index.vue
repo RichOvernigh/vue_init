@@ -14,22 +14,22 @@ export default {
     src: {
       type: String,
       required: true
-    },
+    }
   },
   data() {
     return {
-      height: document.documentElement.clientHeight - 94.5 + "px;",
+      height: document.documentElement.clientHeight - 94.5 + 'px;',
       loading: true,
       url: this.src
     };
   },
-  mounted: function () {
+  mounted: function() {
     setTimeout(() => {
       this.loading = false;
     }, 300);
     const that = this;
     window.onresize = function temp() {
-      that.height = document.documentElement.clientHeight - 94.5 + "px;";
+      that.height = document.documentElement.clientHeight - 94.5 + 'px;';
     };
   }
 };

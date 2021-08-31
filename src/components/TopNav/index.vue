@@ -5,30 +5,32 @@
     @select="handleSelect"
   >
     <template v-for="(item, index) in topMenus">
-      <el-menu-item :style="{'--theme': theme}" :index="item.path" :key="index" v-if="index < visibleNumber"
-        ><svg-icon :icon-class="item.meta.icon" />
-        {{ item.meta.title }}</el-menu-item
-      >
+      <el-menu-item
+        v-if="index < visibleNumber"
+        :key="index"
+        :style="{'--theme': theme}"
+        :index="item.path"
+      ><svg-icon :icon-class="item.meta.icon" />
+        {{ item.meta.title }}</el-menu-item>
     </template>
 
     <!-- 顶部菜单超出数量折叠 -->
-    <el-submenu :style="{'--theme': theme}" index="more" v-if="topMenus.length > visibleNumber">
+    <el-submenu v-if="topMenus.length > visibleNumber" :style="{'--theme': theme}" index="more">
       <template slot="title">更多菜单</template>
       <template v-for="(item, index) in topMenus">
         <el-menu-item
-          :index="item.path"
-          :key="index"
           v-if="index >= visibleNumber"
-          ><svg-icon :icon-class="item.meta.icon" />
-          {{ item.meta.title }}</el-menu-item
-        >
+          :key="index"
+          :index="item.path"
+        ><svg-icon :icon-class="item.meta.icon" />
+          {{ item.meta.title }}</el-menu-item>
       </template>
     </el-submenu>
   </el-menu>
 </template>
 
 <script>
-import { constantRoutes } from "@/router";
+import { constantRoutes } from '@/router';
 
 export default {
   data() {
@@ -47,14 +49,14 @@ export default {
     },
     // 顶部显示菜单
     topMenus() {
-      let topMenus = [];
+      const topMenus = [];
       this.routers.map((menu) => {
         if (menu.hidden !== true) {
           // 兼容顶部栏一级菜单内部跳转
-          if (menu.path === "/") {
-              topMenus.push(menu.children[0]);
+          if (menu.path === '/') {
+            topMenus.push(menu.children[0]);
           } else {
-              topMenus.push(menu);
+            topMenus.push(menu);
           }
         }
       });
@@ -70,11 +72,11 @@ export default {
       this.routers.map((router) => {
         for (var item in router.children) {
           if (router.children[item].parentPath === undefined) {
-            if(router.path === "/") {
-              router.children[item].path = "/redirect/" + router.children[item].path;
+            if (router.path === '/') {
+              router.children[item].path = '/redirect/' + router.children[item].path;
             } else {
-              if(!this.ishttp(router.children[item].path)) {
-                router.children[item].path = router.path + "/" + router.children[item].path;
+              if (!this.ishttp(router.children[item].path)) {
+                router.children[item].path = router.path + '/' + router.children[item].path;
               }
             }
             router.children[item].parentPath = router.path;
@@ -88,29 +90,30 @@ export default {
     activeMenu() {
       const path = this.$route.path;
       let activePath = this.defaultRouter();
-      if (path.lastIndexOf("/") > 0) {
+      if (path.lastIndexOf('/') > 0) {
         const tmpPath = path.substring(1, path.length);
-        activePath = "/" + tmpPath.substring(0, tmpPath.indexOf("/"));
-      } else if ("/index" == path || "" == path) {
+        activePath = '/' + tmpPath.substring(0, tmpPath.indexOf('/'));
+      } else if (path == '/index' || path == '') {
         if (!this.isFrist) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.isFrist = true;
         } else {
-          activePath = "index";
+          activePath = 'index';
         }
       }
       var routes = this.activeRoutes(activePath);
       if (routes.length === 0) {
-        activePath = this.currentIndex || this.defaultRouter()
+        activePath = this.currentIndex || this.defaultRouter();
         this.activeRoutes(activePath);
       }
       return activePath;
-    },
+    }
   },
   beforeMount() {
-    window.addEventListener('resize', this.setVisibleNumber)
+    window.addEventListener('resize', this.setVisibleNumber);
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.setVisibleNumber)
+    window.removeEventListener('resize', this.setVisibleNumber);
   },
   mounted() {
     this.setVisibleNumber();
@@ -137,10 +140,10 @@ export default {
       this.currentIndex = key;
       if (this.ishttp(key)) {
         // http(s):// 路径新窗口打开
-        window.open(key, "_blank");
-      } else if (key.indexOf("/redirect") !== -1) {
+        window.open(key, '_blank');
+      } else if (key.indexOf('/redirect') !== -1) {
         // /redirect 路径内部打开
-        this.$router.push({ path: key.replace("/redirect", "") });
+        this.$router.push({ path: key.replace('/redirect', '') });
       } else {
         // 显示左侧联动菜单
         this.activeRoutes(key);
@@ -151,20 +154,20 @@ export default {
       var routes = [];
       if (this.childrenMenus && this.childrenMenus.length > 0) {
         this.childrenMenus.map((item) => {
-          if (key == item.parentPath || (key == "index" && "" == item.path)) {
+          if (key == item.parentPath || (key == 'index' && item.path == '')) {
             routes.push(item);
           }
         });
       }
-      if(routes.length > 0) {
-        this.$store.commit("SET_SIDEBAR_ROUTERS", routes);
+      if (routes.length > 0) {
+        this.$store.commit('SET_SIDEBAR_ROUTERS', routes);
       }
       return routes;
     },
-	ishttp(url) {
-      return url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1
+    ishttp(url) {
+      return url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1;
     }
-  },
+  }
 };
 </script>
 

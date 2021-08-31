@@ -1,7 +1,7 @@
 /**
  * 封装操作localstorage本地存储的方法
  */
- export const storage = {
+export const storage = {
   // 存储
   set(key, value) {
     try {

@@ -1,6 +1,6 @@
 <template>
   <section class="app-main">
-    <div class="bread">{{name}}</div>
+    <div class="bread">{{ name }}</div>
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
         <router-view :key="key" />
@@ -14,16 +14,16 @@ export default {
   name: 'AppMain',
   computed: {
     cachedViews() {
-      return this.$store.state.tagsView.cachedViews
+      return this.$store.state.tagsView.cachedViews;
     },
     key() {
-      return this.$route.path
+      return this.$route.path;
     },
-    name(){
-      return this.$route.name
+    name() {
+      return this.$route.name;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
