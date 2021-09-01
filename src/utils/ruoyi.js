@@ -118,7 +118,26 @@ export function praseStrEmpty(str) {
   }
   return str;
 }
-
+// 参数处理
+export function tansParams(params) {
+  let result = '';
+  Object.keys(params).forEach((key) => {
+    if (!Object.is(params[key], undefined) && !Object.is(params[key], null) && !Object.is(JSON.stringify(params[key]), '{}')) {
+      if (key !== 'params') {
+        result += encodeURIComponent(key) + '=' + encodeURIComponent(params[key]) + '&';
+      } else {
+        for (const propName of Object.keys(params.params)) {
+          const value = params.params[propName];
+          if (value !== null && typeof (value) !== 'undefined') {
+            result += 'params' + '[' + propName + ']' + '=' + encodeURIComponent(value) + '&';
+          }
+        }
+      }
+    }
+  });
+  result = result.slice(0, -1);
+  return result;
+}
 /**
  * 构造树型结构数据
  * @param {*} data 数据源

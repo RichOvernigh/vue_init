@@ -3,7 +3,7 @@ import { Notification, MessageBox, Message } from 'element-ui';
 import store from '@/store';
 import { getToken } from '@/utils/auth';
 import errorCode from '@/utils/errorCode';
-
+import { tansParams } from '@/utils/ruoyi';
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 // 创建axios实例
 const service = axios.create({
@@ -98,5 +98,33 @@ error => {
   return Promise.reject(error);
 }
 );
-
+// 通用下载方法
+export function download(url, params, filename) {
+  return service.post(url, params, {
+    transformRequest: [(params) => {
+      return tansParams(params);
+    }],
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    responseType: 'blob'
+  }).then((data) => {
+    const content = data;
+    const blob = new Blob([content]);
+    if ('download' in document.createElement('a')) {
+      const elink = document.createElement('a');
+      elink.download = filename;
+      elink.style.display = 'none';
+      elink.href = URL.createObjectURL(blob);
+      document.body.appendChild(elink);
+      elink.click();
+      URL.revokeObjectURL(elink.href);
+      document.body.removeChild(elink);
+    } else {
+      navigator.msSaveBlob(blob, filename);
+    }
+  }).catch((r) => {
+    console.error(r);
+  });
+}
 export default service;

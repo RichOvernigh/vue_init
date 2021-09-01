@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container home1">
+  <div class="app-container">
     <el-form
       v-show="showSearch"
       ref="queryForm"
@@ -31,6 +31,7 @@
               placeholder="请选择"
               clearable
               size="small"
+              @keyup.enter.native="handleQuery"
             >
               <el-option
                 v-for="dict in income_type"
@@ -55,6 +56,9 @@
       </el-row>
     </el-form>
     <el-row :gutter="10" class="mb8">
+      <el-col :span="1.5">
+        <el-button type="primary" size="mini" @click="handleExport">导出</el-button>
+      </el-col>
       <right-toolbar :show-search.sync="showSearch" @queryTable="getList" />
     </el-row>
     <div class="total-content">
@@ -64,7 +68,9 @@
     </div>
     <el-table v-loading="loading" style="width: 100%" :data="list.collectionDailyList">
       <el-table-column label="收款渠道（内部）" align="center" prop="paymentType">
-        <div slot-scope="{row}">{{ dictFormatter(row.paymentType) }}({{ row.companyName }})</div>
+        <div slot-scope="{row}">{{ dictFormatter(row.paymentType) }}({{ row.companyName }})
+          <!-- -{{ incomeTypeDictFormatter(row.incomeType) }} -->
+        </div>
       </el-table-column>
       <el-table-column label="累计收入（元）" align="center" prop="amountOfIncome" />
       <el-table-column label="累计退款（元）" align="center" prop="cumulativeRefund" />
@@ -87,10 +93,7 @@ export default {
       // 显示搜索条件
       showSearch: true,
       // 总条数
-      queryParams: {
-        pageNum: 1,
-        pageSize: 20
-      },
+      queryParams: {},
       income_channel: [],
       income_type: []
     };
@@ -108,6 +111,9 @@ export default {
     dictFormatter(value) {
       return this.selectDictLabel(this.income_channel, value);
     },
+    incomeTypeDictFormatter(value) {
+      return this.selectDictLabel(this.income_type, value);
+    },
     // 查询列表
     getList() {
       this.loading = true;
@@ -119,34 +125,26 @@ export default {
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1;
       this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
       this.dateRange = [];
       this.resetForm('queryForm');
-      this.queryParams = {
-        pageNum: 1,
-        pageSize: 20
-      };
+      this.queryParams = {};
       this.handleQuery();
     },
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = deepClone(this.queryParams);
-      delete queryParams.pageNum;
-      delete queryParams.pageSize;
       for (var key in queryParams) {
-        if (queryParams[key] == '') {
+        if (!queryParams[key]) {
           delete queryParams[key];
         }
       }
-      if (Object.keys(queryParams).length === 1 && !Object.keys(queryParams.params).length) {
-        return this.$message.error('请筛选后导出');
-      }
-      this.download('/carnival/orderAfterSales/export', {
-        ...queryParams
+      const query = this.addDateRange(this.queryParams, this.dateRange);
+      this.download('/collectionDaily/export', {
+        ...query
       }, `收款日报${new Date().getTime()}.xlsx`);
     }
   }

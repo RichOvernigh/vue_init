@@ -20,7 +20,7 @@ export default {
       return this.$route.path;
     },
     name() {
-      return this.$route.name;
+      return this.$route.meta.title || '';
     }
   }
 };
